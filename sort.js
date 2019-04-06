@@ -4,12 +4,13 @@
   let o = {}
   o.quicksort = (arr, start, end) => {
     if (start >= end) {
-      return true
+      return arr
     } else {
       let index = partition(arr, start, end)
       o.quicksort(arr, start, index - 1)
       o.quicksort(arr, index + 1, end)
     }
+    return arr
   }
   function partition(arr, start, end) {
     let pivot = end
@@ -42,24 +43,30 @@
       }
       swap(arr, i, m)
     }
+    return arr 
   }
   o.bubble = (arr) => {
     for(let i=0; i<arr.length; i++){
-      for(let j=0; j<i; j++){
+      for(let j=0; j<arr.length-i-1; j++){
         if(arr[j]> arr[j+1]){
           swap(arr, j, j+1)
         }
       }
     }
+    return arr
   }
   o.insertion = (arr) => {
-    for(let i=1; i<arr.length; i++){
-      for(let j=0; j<i; j++){
-        if(arr[j]>arr[i]){
-          swap(arr, j, i)
-        }
+    let j, key, i, length
+    for (j = 1, length = arr.length; j < length; j++) {
+      key = arr[j]
+      i = j - 1
+      while (i >= 0 && arr[i] > key) {
+        arr[i + 1] = arr[i];
+        i = i - 1
       }
+      arr[i + 1] = key
     }
+    return arr
   }
   return o
 }))
